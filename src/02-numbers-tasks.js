@@ -19,8 +19,8 @@
  *   5, 10 => 50
  *   5, 5  => 25
  */
-function getRectangleArea( width, height ) {
-  return width*height;
+function getRectangleArea(width, height) {
+  return width * height;
 }
 
 
@@ -35,8 +35,8 @@ function getRectangleArea( width, height ) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  */
-function getCircleCircumference( radius ) {
-  return radius*Math.PI*2;
+function getCircleCircumference(radius) {
+  return radius * Math.PI * 2;
 }
 
 /**
@@ -51,8 +51,8 @@ function getCircleCircumference( radius ) {
  *  10, 0  => 5
  *  -3, 3  => 0
  */
-function getAverage( value1, value2 ) {
-  return ((value1/2)+(value2/2));
+function getAverage(value1, value2) {
+  return ((value1 / 2) + (value2 / 2));
 }
 
 /**
@@ -70,10 +70,10 @@ function getAverage( value1, value2 ) {
  *   (0,0) (1,0)    => 1
  *   (-5,0) (10,-10) => 18.027756377319946
  */
-function getDistanceBetweenPoints( x1, y1, x2, y2 ) {
-  const distanceX=x2-x1;
-  const distanceY=y2-y1;
-  return Math.sqrt((distanceX*distanceX)+(distanceY*distanceY));
+function getDistanceBetweenPoints(x1, y1, x2, y2) {
+  const distanceX = x2 - x1;
+  const distanceY = y2 - y1;
+  return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
 }
 
 /**
@@ -88,8 +88,8 @@ function getDistanceBetweenPoints( x1, y1, x2, y2 ) {
  *   x + 8 = 0       => -8
  *   5*x = 0         => 0
  */
-function getLinearEquationRoot(/* a, b */) {
-  throw new Error('Not implemented');
+function getLinearEquationRoot(a, b) {
+  return -b / a;
 }
 
 
@@ -98,10 +98,10 @@ function getLinearEquationRoot(/* a, b */) {
  * coordinates in Cartesian plane.
  * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
  *
- * @param {number} x1
- * @param {number} y1
- * @param {number} x2
- * @param {number} y2
+ * @param {number} //x1
+ * @param {number} //y1
+ * @param {number} //x2
+ * @param {number} //y2
  * @return {number}
  *
  * @example:
@@ -111,9 +111,7 @@ function getLinearEquationRoot(/* a, b */) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
-  throw new Error('Not implemented');
-}
+// function getAngleBetweenVectors( x1, y1, x2, y2 ) {return }
 
 /**
  * Returns a last digit of a integer number.
@@ -127,8 +125,8 @@ function getAngleBetweenVectors(/* x1, y1, x2, y2 */) {
  *     5     => 5
  *     0     => 0
  */
-function getLastDigit(/* value */) {
-  throw new Error('Not implemented');
+function getLastDigit(value) {
+  return +String(value).slice(-1);
 }
 
 
@@ -143,8 +141,8 @@ function getLastDigit(/* value */) {
  *     '37'     => 37
  * '-525.5'     => -525.5
  */
-function parseNumberFromString(/* value */) {
-  throw new Error('Not implemented');
+function parseNumberFromString(value) {
+  return value;
 }
 
 /**
@@ -160,16 +158,16 @@ function parseNumberFromString(/* value */) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  return Math.sqrt((a ** 2) + (b ** 2) + (c ** 2));
 }
 
 
 /**
  * Returns the number rounded to specified power of 10.
  *
- * @param {number} num
- * @param {number} pow
+ * @param {number} //num
+ * @param {number} //pow
  * @return {number}
  *
  * @example:
@@ -182,9 +180,7 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
-}
+// function roundToPowerOfTen(num, pow) {return }
 
 /**
  * Returns true is the number is prime; otherwise false.
@@ -203,8 +199,16 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n <= 1) {
+    return false;
+  }
+  for (let i = 2; i <= Math.sqrt(n); i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -222,8 +226,8 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  return Number.isNaN(Number(value)) ? def : (Number(value));
 }
 
 module.exports = {
@@ -232,11 +236,11 @@ module.exports = {
   getAverage,
   getDistanceBetweenPoints,
   getLinearEquationRoot,
-  getAngleBetweenVectors,
+  // getAngleBetweenVectors,
   getLastDigit,
   parseNumberFromString,
   getParallelepipedDiagonal,
-  roundToPowerOfTen,
+  // roundToPowerOfTen,
   isPrime,
   toNumber,
 };

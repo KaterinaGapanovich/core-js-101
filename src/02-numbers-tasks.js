@@ -98,10 +98,10 @@ function getLinearEquationRoot(a, b) {
  * coordinates in Cartesian plane.
  * See details https://en.wikipedia.org/wiki/Euclidean_vector#Representations
  *
- * @param {number} //x1
- * @param {number} //y1
- * @param {number} //x2
- * @param {number} //y2
+ * @param {number} x1
+ * @param {number} y1
+ * @param {number} x2
+ * @param {number} y2
  * @return {number}
  *
  * @example:
@@ -111,7 +111,12 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (0,1)     => 0
  *   (0,1) (1,2)     => 0
  */
-// function getAngleBetweenVectors( x1, y1, x2, y2 ) {return }
+function getAngleBetweenVectors(x1, y1, x2, y2) {
+  const all = (x1 * x2 + y1 * y2);
+  const magnfirst = Math.sqrt(x1 ** 2 + y1 ** 2);
+  const magnsecond = Math.sqrt(x2 ** 2 + y2 ** 2);
+  return Math.acos(all / (magnfirst * magnsecond));
+}
 
 /**
  * Returns a last digit of a integer number.
@@ -166,8 +171,8 @@ function getParallelepipedDiagonal(a, b, c) {
 /**
  * Returns the number rounded to specified power of 10.
  *
- * @param {number} //num
- * @param {number} //pow
+ * @param {number} num
+ * @param {number} pow
  * @return {number}
  *
  * @example:
@@ -180,7 +185,9 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-// function roundToPowerOfTen(num, pow) {return }
+function roundToPowerOfTen(num, pow) {
+  return Math.round(num / (10 ** pow)) * (10 ** pow);
+}
 
 /**
  * Returns true is the number is prime; otherwise false.
@@ -236,11 +243,11 @@ module.exports = {
   getAverage,
   getDistanceBetweenPoints,
   getLinearEquationRoot,
-  // getAngleBetweenVectors,
+  getAngleBetweenVectors,
   getLastDigit,
   parseNumberFromString,
   getParallelepipedDiagonal,
-  // roundToPowerOfTen,
+  roundToPowerOfTen,
   isPrime,
   toNumber,
 };

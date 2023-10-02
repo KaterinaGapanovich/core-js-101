@@ -74,7 +74,7 @@ function getFactorial(n) {
  */
 function getSumBetweenNumbers(n1, n2) {
   let result = 0;
-  for (let k = n2; k <= n2; k += 1) {
+  for (let k = n1; k <= n2; k += 1) {
     result += k;
   }
   return result;
@@ -229,7 +229,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
   } else {
     result = '(';
   } if (isEndIncluded) {
-    result += `&{minnum}, ${maxnum}]`;
+    result += `${minnum}, ${maxnum}]`;
   } else { result += `${minnum}, ${maxnum})`; }
   return result;
 }

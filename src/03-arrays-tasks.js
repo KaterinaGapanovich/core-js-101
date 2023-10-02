@@ -309,7 +309,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter((number) => typeof number === 'string' && number > 0).length;
+  return arr.filter((element) => typeof element === 'number' && element > 0).length;
 }
 
 /**
@@ -434,18 +434,13 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  return arr.sort((x, y) => {
-    if (x.country === y.country) {
-      return x.city.localeCompare(y.city);
-    }
-    return y.country.localeCompare(y.country);
-  });
+  return arr.sort((x, y) => x.country.localeCompare(y.country) || x.city.localeCompare(y.city));
 }
 
 /**
  * Creates an identity matrix of the specified size
  *
- * @param {number} //n
+ * @param {number} n
  * @return {array}
  *
  * @example
@@ -460,9 +455,9 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-// function getIdentityMatrix( n ) {
-// return Array.from();
-// }
+function getIdentityMatrix(n) {
+  return [...Array(n)].map((a, x, array) => array.map((b, y) => (x === y ? 1 : 0)));
+}
 
 /**
  * Creates an array of integers from the specified start to end (inclusive)
@@ -478,8 +473,7 @@ function sortCitiesArray(arr) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  const all = end - start + 1;
-  return Array.from({ all }, (_, i) => start + i);
+  return Array(end - start + 1).fill().map((element, index) => start + index);
 }
 
 /**
@@ -505,9 +499,9 @@ function distinct(arr) {
  * and values extracted via valueSelector callback.
  * See: https://en.wikipedia.org/wiki/Multimap
  *
- * @param {array} //array
- * @param {Function} //keySelector
- * @param {Function} //valueSelector
+ * @param {array} array
+ * @param {Function} keySelector
+ * @param {Function} valueSelector
  * @return {Map}
  *
  * @example
@@ -529,9 +523,20 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-// function group(/* array, keySelector, valueSelector */) {
-// throw new Error('Not implemented');
-// }
+function group(array, keySelector, valueSelector) {
+  const myresult = {};
+
+  array.map((item) => {
+    const key = keySelector(item);
+    const value = valueSelector(item);
+
+    if (!myresult[key]) myresult[key] = [];
+    myresult[key].push(value);
+    return item;
+  });
+
+  return new Map(Object.entries(myresult));
+}
 
 
 /**
@@ -551,7 +556,7 @@ function selectMany(arr, childrenSelector) {
   return arr.reduce((result, haf) => {
     const sel = childrenSelector(haf);
     return result.concat(sel);
-  });
+  }, []);
 }
 
 
@@ -578,7 +583,7 @@ function getElementByIndexes(arr, indexes) {
  * The middle element (if exists) leave on the same position.
  *
  *
- * @param {array} //arr
+ * @param {array} arr
  * @return {array}
  *
  * @example
@@ -590,9 +595,12 @@ function getElementByIndexes(arr, indexes) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-// function swapHeadAndTail(/* arr */) {
-// throw new Error('Not implemented');
-// }
+function swapHeadAndTail(arr) {
+  const middle = Math.floor(arr.length / 2);
+  const head = arr.splice(-middle);
+  const tail = arr.splice(0, middle);
+  return [...head, ...arr, ...tail];
+}
 
 
 module.exports = {
@@ -620,11 +628,11 @@ module.exports = {
   getFalsyValuesCount,
   findAllOccurrences,
   sortCitiesArray,
-  // getIdentityMatrix,
+  getIdentityMatrix,
   getIntervalArray,
   distinct,
-  // group,
+  group,
   selectMany,
   getElementByIndexes,
-  // swapHeadAndTail,
+  swapHeadAndTail,
 };

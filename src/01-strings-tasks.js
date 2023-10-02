@@ -183,8 +183,8 @@ function extractEmails(str) {
  * Returns the string representation of rectangle with specified width and height
  * using pseudograhic chars
  *
- * @param {number} //width
- * @param {number} //height
+ * @param {number} width
+ * @param {number} height
  * @return {string}
  *
  * @example
@@ -202,14 +202,19 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-// function getRectangleString(width, height) {return}
+function getRectangleString(width, height) {
+  const top = `┌${'─'.repeat(width - 2)}┐\n`;
+  const line = `│${' '.repeat(width - 2)}│\n`.repeat(height - 2);
+  const bottom = `└${'─'.repeat(width - 2)}┘\n`;
+  return `${top}${line}${bottom}`;
+}
 
 
 /**
  * Encode specified string with ROT13 cipher
  * See details:  https://en.wikipedia.org/wiki/ROT13
  *
- * @param {string} //str
+ * @param {string} str
  * @return {string}
  *
  * @example
@@ -221,7 +226,10 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-// function encodeToRot13(str) {return}
+function encodeToRot13(str) {
+  const result = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, (element) => result[result.indexOf(element) + 13]);
+}
 
 /**
  * Returns true if the value is string; otherwise false.
@@ -336,8 +344,8 @@ module.exports = {
   unbracketTag,
   convertToUpperCase,
   extractEmails,
-  // getRectangleString,
-  // encodeToRot13,
+  getRectangleString,
+  encodeToRot13,
   isString,
   getCardId,
 };
